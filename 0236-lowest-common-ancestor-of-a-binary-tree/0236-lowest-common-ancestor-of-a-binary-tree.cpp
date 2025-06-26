@@ -8,26 +8,22 @@
  * };
  */
 class Solution {
-    vector<TreeNode*> pp, qq, temp;
-    void dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root) return;
-        temp.push_back(root);
-        if(root == p) pp = temp;
-        if(root == q) qq = temp;
-        dfs(root->left,p, q);
-        dfs(root->right,p ,q);
-        temp.pop_back();
+    TreeNode* dfs(TreeNode* root, TreeNode* p, TreeNode* q){
+        
+        if(!root || root == p || root == q){
+            return root;
+        }
+        TreeNode* left = dfs(root->left,p,q);
+        TreeNode* right = dfs(root->right,p,q);
+        if(left && right) return root;
+        if(left)
+             return left;
+        else
+            return right;
+        
     }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        dfs(root, p ,q);
-        TreeNode* ans;
-        for(int i=0 ; i<min(qq.size(),pp.size()); i++){
-            if(pp[i] == qq[i])
-                ans = pp[i];
-            else
-                break;
-        }
-        return ans;
-    }
+        return dfs(root,p,q);
+     }
 };
