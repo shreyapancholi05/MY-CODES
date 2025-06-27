@@ -1,13 +1,19 @@
 class Solution {
+    vector<int> dx = {-1, 1, 0 , 0};
+    vector<int> dy = {0, 0, -1, 1};
     void dfs(int i,int j, vector<vector<int>> &grid,int m, int n){
         if(i<0 || j<0 || i>=m || j>=n ||grid[i][j] == 0) 
             return;
         grid[i][j] = 0;
+        /*
         dfs(i-1, j, grid, m, n);
         dfs(i+1 , j, grid, m, n);
         dfs(i ,j-1 ,grid, m, n);
         dfs(i, j+1 , grid, m ,n);
-            
+            */
+        for(int dir=0; dir<4; dir++){
+            dfs(i + dx[dir] , j + dy[dir] , grid, m, n);
+        }
     }
 public:
     int numEnclaves(vector<vector<int>>& grid) {
