@@ -1,0 +1,33 @@
+void dfs(int node, vector<vector<int>> &adj, vector<int>& vis, vector<int>& temp) {
+    vis[node] = 1;
+    temp.push_back(node);
+    for(int neighbour : adj[node]){
+        if(!vis[neighbour])
+            dfs(neighbour,adj,vis,temp);
+    }
+}
+vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
+{
+    vector<int> vis(V,0);
+    vector<vector<int>> ans;
+    vector<vector<int>> adj(V);
+
+    for(auto e : edges){
+        int u = e[0];
+        int v = e[1];
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    for (int i=0; i<V; i++) {
+        if (vis[i]) {
+            continue;
+        }
+        else{
+            vector<int>temp;
+            dfs(i, adj, vis, temp);
+            ans.push_back(temp);
+        }
+        
+    }
+    return ans;
+}
