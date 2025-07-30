@@ -1,23 +1,21 @@
 class Solution {
   public:
-
     int getSecondLargest(vector<int> &arr) {
         // code here
-          int largest = arr[0];
-        int seclargest = -1;
+        int secondlargest = -1;
+        int maxelem = arr[0];
         
-        for(int i=1; i<arr.size(); i++){
-            if(arr[i] > largest ){
-                seclargest = largest;
-                largest = arr[i];
-             }
-             else if(arr[i] < largest && arr[i] > seclargest){
-                 seclargest = arr[i];
-                 
-             }
-      
+        for(int i = 1; i<arr.size(); i++){
+            if(arr[i] > maxelem){
+                secondlargest = maxelem;
+                maxelem = arr[i];
+                
+            
+            }
+            else if(arr[i] < maxelem && arr[i] > secondlargest){
+                secondlargest = max(arr[i], secondlargest);
+            }
         }
-        return seclargest;
-        
-        }
+        return secondlargest;
+    }
 };
