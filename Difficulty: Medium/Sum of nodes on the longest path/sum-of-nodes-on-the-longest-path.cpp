@@ -14,8 +14,9 @@ class Node {
 
 class Solution {
   public:
-    void solve(Node* root, int len, int &maxlen, int sum , int &maxsum){
-        if( root == NULL){
+  
+    void solve(Node* root, int sum , int &maxsum, int len , int &maxlen){
+        if(root == NULL){
             if(len > maxlen){
                 maxlen = len;
                 maxsum = sum;
@@ -24,25 +25,23 @@ class Solution {
             else if(len == maxlen){
                 maxsum = max(sum , maxsum);
             }
-            
             return;
         }
         
         sum = sum + root->data;
         
-        solve(root->left, len+1 , maxlen, sum , maxsum);
-        solve(root->right, len+1, maxlen, sum , maxsum);
+        solve(root->left, sum , maxsum , len+1 , maxlen);
+        
+        solve(root->right, sum , maxsum , len+1 , maxlen);
     }
     int sumOfLongRootToLeafPath(Node *root) {
         // code here
         int len = 0;
         int maxlen = 0;
-        
         int sum = 0;
         int maxsum = INT_MIN;
         
-        solve(root, len, maxlen, sum , maxsum);
+        solve(root , sum , maxsum , len , maxlen);
         return maxsum;
-        
     }
 };
