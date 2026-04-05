@@ -3,18 +3,20 @@ class Solution {
     int getSecondLargest(vector<int> &arr) {
         // code here
         int n = arr.size();
-        int maxi = arr[0];
-        int second = -1;
+        int largest = -1; 
+        int secondlar = -1;
         
-        for(int i=1; i<n; i++){
-            if(arr[i] > maxi){
-                second = maxi;
-                maxi = arr[i];
+        for(int i = 0; i<n; i++){
+            if(arr[i] > largest){
+                secondlar = largest;
+                largest = arr[i];
+                
             }
-            else if(arr[i] < maxi && arr[i] > second){
-                second = arr[i];
+            else if(arr[i] < largest && arr[i] > secondlar){
+                secondlar = arr[i];
             }
         }
-        return second;
+        
+        return secondlar;
     }
 };
